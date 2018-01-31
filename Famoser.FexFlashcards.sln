@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2026
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Famoser.FexFlashcards.WindowsPresentation", "Famoser.FexFlashcards.WindowsPresentation\Famoser.FexFlashcards.WindowsPresentation.csproj", "{04E7029B-E64F-4439-AD7F-1DFAC35F4D52}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{A235789F-F556-44B4-BF5F-5D22E4AB5EDD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Famoser.FexFlashcards.View", "Famoser.FexFlashcards.View\Famoser.FexFlashcards.View.csproj", "{7EE70309-E307-43F6-9A37-4440613720BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Famoser.FexFlashcards.Business", "Famoser.FexFlashcards.Business\Famoser.FexFlashcards.Business.csproj", "{2F7F9AE4-2504-4980-AFFF-8729B478AB5F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{04E7029B-E64F-4439-AD7F-1DFAC35F4D52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04E7029B-E64F-4439-AD7F-1DFAC35F4D52}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04E7029B-E64F-4439-AD7F-1DFAC35F4D52}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04E7029B-E64F-4439-AD7F-1DFAC35F4D52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7EE70309-E307-43F6-9A37-4440613720BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7EE70309-E307-43F6-9A37-4440613720BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7EE70309-E307-43F6-9A37-4440613720BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7EE70309-E307-43F6-9A37-4440613720BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F7F9AE4-2504-4980-AFFF-8729B478AB5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F7F9AE4-2504-4980-AFFF-8729B478AB5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F7F9AE4-2504-4980-AFFF-8729B478AB5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F7F9AE4-2504-4980-AFFF-8729B478AB5F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7EE70309-E307-43F6-9A37-4440613720BF} = {A235789F-F556-44B4-BF5F-5D22E4AB5EDD}
+		{2F7F9AE4-2504-4980-AFFF-8729B478AB5F} = {A235789F-F556-44B4-BF5F-5D22E4AB5EDD}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EEC17FAF-91E3-441E-9BCD-0BC8041D1C02}
+	EndGlobalSection
+EndGlobal

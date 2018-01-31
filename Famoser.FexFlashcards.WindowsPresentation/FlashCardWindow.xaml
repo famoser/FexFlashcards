@@ -1,0 +1,14 @@
+﻿<Window
+    x:Class="Famoser.FexFlashcards.WindowsPresentation.FlashCardWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Famoser.FexFlashcards.WindowsPresentation"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="FlashCardWindow"
+    Width="300"
+    Height="300"
+    DataContext="{Binding FlashCardViewModel, Source={StaticResource Locator}}"
+    mc:Ignorable="d">
+    <Grid />
+</Window>

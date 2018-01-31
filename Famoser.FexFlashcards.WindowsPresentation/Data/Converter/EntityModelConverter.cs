@@ -5,12 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using Famoser.FexFlashcards.WindowsPresentation.Business.Models;
 using Famoser.FexFlashcards.WindowsPresentation.Data.Entity;
+using Famoser.FexFlashcards.WindowsPresentation.Data.Entity.FexCompiler;
+using Famoser.FexFlashcards.WindowsPresentation.Data.Entity.Statistics;
 
 namespace Famoser.FexFlashcards.WindowsPresentation.Data.Converter
 {
     class EntityModelConverter
     {
-        public FlashCardCollectionModel ToFlashCardCollectionModel(FlashCardCollectionEntity entity)
+        public static FlashCardCollectionModel ToFlashCardCollectionModel(FlashCardCollectionEntity entity)
         {
             var coll = new FlashCardCollectionModel()
             {
@@ -35,6 +37,34 @@ namespace Famoser.FexFlashcards.WindowsPresentation.Data.Converter
             }
 
             return coll;
+        }
+
+        public static void AttachStatisticInfos(FlashCardCollectionModel model,
+            FlashCardCollectionStatisticsEntity statistics)
+        {
+            model.TimesPlayed = statistics.TimesPlayed;
+            model.TimesOpened = statistics.TimesOpened;
+
+            //match cards with statistics
+            var matchings = from t1 in model.FlashCardModels
+                join t2 in statistics.FlashCardStatisticsEntity on t1.Hash equals t2.Hash
+                select new { t1, t2 };
+
+            var enumeratedMatchings = matchings.ToList();
+
+            foreach (var matching in enumeratedMatchings)
+            {
+                matching.t1.DifficultyLevel = matching.t2.DifficultyLevel;
+                matching.t1.TimesPlayed = matching.t2.TimesPlayed;
+            }
+
+
+            var onlyModels = enumeratedMatchings.Select(e => e.t1);
+            var newOnes = model.FlashCardModels.Where(s => !onlyModels.Contains(s));
+            foreach (var flashCardModel in newOnes)
+            {
+                flashCardModel.IsNew = true;
+            }
         }
     }
 }

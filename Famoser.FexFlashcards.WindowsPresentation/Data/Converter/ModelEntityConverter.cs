@@ -10,7 +10,7 @@ namespace Famoser.FexFlashcards.WindowsPresentation.Data.Converter
 {
     class ModelEntityConverter
     {
-        public FlashCardCollectionStatisticsEntity ConvertToFlashCardCollectionStatisticsEntity(FlashCardCollectionModel model)
+        public static FlashCardCollectionStatisticsEntity ConvertToFlashCardCollectionStatisticsEntity(FlashCardCollectionModel model)
         {
             var entity = new FlashCardCollectionStatisticsEntity()
             {

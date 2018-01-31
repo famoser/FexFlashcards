@@ -8,7 +8,7 @@ using GalaSoft.MvvmLight;
 
 namespace Famoser.FexFlashcards.WindowsPresentation.Business.Models
 {
-    class FlashCardCollectionModel : ObservableObject
+    public class FlashCardCollectionModel : ObservableObject
     {
         public string Hash { get; set; }
         public string Title { get; set; }
@@ -29,5 +29,6 @@ namespace Famoser.FexFlashcards.WindowsPresentation.Business.Models
             set => Set(ref _timesPlayed, value);
         }
 
+        public string CardsHistoryPath { get; set; }
     }
 }

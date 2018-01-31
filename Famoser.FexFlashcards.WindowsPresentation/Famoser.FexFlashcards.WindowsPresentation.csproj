@@ -72,8 +72,32 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Business\Helpers\PathHelper.cs" />
+    <Compile Include="Business\Models\FlashCardCollectionModel.cs" />
+    <Compile Include="Business\Models\FlashCardModel.cs" />
+    <Compile Include="Business\Repositories\FlashCardRepository.cs" />
+    <Compile Include="Business\Repositories\Interfaces\IFlashCardRepository.cs" />
+    <Compile Include="Business\Repositories\Mock\FlashCardRepositoryMock.cs" />
+    <Compile Include="Converter\DateTimeConverter.cs" />
+    <Compile Include="Data\ConfigurationEntity.cs" />
+    <Compile Include="Data\Converter\EntityModelConverter.cs" />
+    <Compile Include="Data\Converter\ModelEntityConverter.cs" />
+    <Compile Include="Data\Entity\FexCompiler\FlashCardCollectionEntity.cs" />
+    <Compile Include="Data\Entity\FexCompiler\FlashCardEntity.cs" />
+    <Compile Include="Data\Entity\FexCompiler\MetaDataEntity.cs" />
+    <Compile Include="Data\Entity\FexCompiler\StatisticEntity.cs" />
+    <Compile Include="Data\Entity\Statistics\FlashCardStatisticsEntity.cs" />
+    <Compile Include="Data\Entity\Statistics\FlashCardCollectionStatisticsEntity.cs" />
+    <Compile Include="FlashCardWindow.xaml.cs">
+      <DependentUpon>FlashCardWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\FlashCardViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Page Include="FlashCardWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -114,5 +138,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

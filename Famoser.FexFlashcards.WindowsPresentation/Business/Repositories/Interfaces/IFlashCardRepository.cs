@@ -6,7 +6,10 @@ namespace Famoser.FexFlashcards.WindowsPresentation.Business.Repositories.Interf
     interface IFlashCardRepository
     {
         ObservableCollection<FlashCardCollectionModel> GetFlashCardCollections();
+        void RefreshFlashCardCollections();
+        string GetBasePath();
         void SetNewBasePath(string basePath);
-        void FindFlashCardCollections();
+
+        void SaveFor(FlashCardCollectionModel flashCardCollectionModel);
     }
 }

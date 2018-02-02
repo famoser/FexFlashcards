@@ -51,7 +51,7 @@ namespace Famoser.FexFlashcards.WindowsPresentation.Business.Repositories.Mock
                 TimesPlayed = _random.Next(),
                 ContentLineCount = _random.Next(),
                 Content = "mein text ist lage \nund hat textumbrüche",
-                DifficultyLevel = _random.Next(),
+                DifficultyLevel = 0,
                 Path = "Titel -> Begriff -> dinge",
                 Title = "Network Security"
             };

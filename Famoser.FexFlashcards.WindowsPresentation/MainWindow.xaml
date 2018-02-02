@@ -6,6 +6,7 @@
     xmlns:local="clr-namespace:Famoser.FexFlashcards.WindowsPresentation"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:models="clr-namespace:Famoser.FexFlashcards.WindowsPresentation.Business.Models"
+    xmlns:converter="clr-namespace:Famoser.FexFlashcards.WindowsPresentation.Converter"
     Title="MainWindow"
     Width="600"
     Height="350"
@@ -13,6 +14,7 @@
     mc:Ignorable="d">
 
     <Window.Resources>
+        <converter:StringIntConverter x:Key="StringIntConverter" />
         <DataTemplate x:Key="CollectionDataTemplate" DataType="models:FlashCardCollectionModel">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -34,11 +36,19 @@
         </DataTemplate>
     </Window.Resources>
 
-    <StackPanel>
-        <TextBlock Text="choose the path to look for" />
-        <TextBox Text="{Binding BasePath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-        <TextBlock Text="what do you want to train next?" />
-        <ListView
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Text="choose the path to look for" />
+        <TextBox Grid.Row="1" Text="{Binding BasePath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        <TextBlock Grid.Row="2" Text="what do you want to train next?" />
+        <ListView  Grid.Row="3"
             ItemTemplate="{StaticResource CollectionDataTemplate}"
             ItemsSource="{Binding FlashCardCollections}"
             SelectedItem="{Binding Selected, Mode=TwoWay}">
@@ -48,5 +58,14 @@
                 </Style>
             </ListView.ItemContainerStyle>
         </ListView>
-    </StackPanel>
+        <TextBlock Grid.Row="4" Text="choose your difficuly level and press start:" />
+        <StackPanel Grid.Row="5" Orientation="Horizontal">
+            <TextBlock Margin="0,1,10,0">
+                <Run Text="0 -" />
+                <Run Text="{Binding MaxLevel}" />
+            </TextBlock>
+            <TextBox InputScope="Number" Width="50" Text="{Binding SelectedLevel, Converter={StaticResource StringIntConverter}}" />
+            <Button Command="{Binding StartTrainingCommand}" Margin="10,0" Width="80" Content="Lets go!" />
+        </StackPanel>
+    </Grid>
 </Window>

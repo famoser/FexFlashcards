@@ -3,6 +3,9 @@ using Famoser.FexFlashcards.WindowsPresentation.Business.Models;
 using GalaSoft.MvvmLight;
 using Famoser.FexFlashcards.WindowsPresentation.Business.Repositories.Interfaces;
 using Famoser.FexFlashcards.WindowsPresentation.Data.Entity.FexCompiler;
+using System.Linq;
+using System.Windows.Input;
+using GalaSoft.MvvmLight.Command;
 
 namespace Famoser.FexFlashcards.WindowsPresentation.ViewModel
 {
@@ -57,13 +60,39 @@ namespace Famoser.FexFlashcards.WindowsPresentation.ViewModel
                 {
                     if (_selected != null)
                     {
-                        FlashCardWindow window = new FlashCardWindow();
-                        window.SetFlashCardCollection(_selected);
-                        window.Show();
-                        Selected = null;
+                        MaxLevel = Selected.FlashCardModels.Max(s => s.DifficultyLevel);
                     }
                 }
             }
+        }
+
+
+        private int _maxLevel;
+        public int MaxLevel
+        {
+            get => _maxLevel;
+            set => Set(ref _maxLevel, value);
+        }
+
+
+        private int _selectedLevel;
+        public int SelectedLevel
+        {
+            get => _selectedLevel;
+            set => Set(ref _selectedLevel, value);
+        }
+
+        public ICommand StartTrainingCommand
+        {
+            get => new RelayCommand(StartTraining);
+        }
+
+        private void StartTraining()
+        {
+            FlashCardWindow window = new FlashCardWindow();
+            window.SetFlashCardCollection(Selected, SelectedLevel);
+            window.Show();
+            Selected = null;
         }
     }
 }

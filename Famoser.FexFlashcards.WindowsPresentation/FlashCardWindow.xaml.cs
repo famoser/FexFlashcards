@@ -28,11 +28,11 @@ namespace Famoser.FexFlashcards.WindowsPresentation
             InitializeComponent();
         }
 
-        public void SetFlashCardCollection(FlashCardCollectionModel collection)
+        public void SetFlashCardCollection(FlashCardCollectionModel collection, int selectedLevel)
         {
             var viewModel = DataContext as FlashCardViewModel;
             if (viewModel != null)
-                viewModel.FlashCards = collection;
+                viewModel.SetFlashCardCollection(collection, selectedLevel);
         }
     }
 }

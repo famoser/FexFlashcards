@@ -52,7 +52,7 @@ namespace Famoser.FexFlashcards.WindowsPresentation.Business.Repositories.Mock
                 ContentLineCount = _random.Next(),
                 Content = "mein text ist lage \nund hat textumbrüche",
                 DifficultyLevel = 0,
-                Path = "Titel -> Begriff -> dinge",
+                Path = "Titel → Begriff → dinge",
                 Title = "Network Security"
             };
         }

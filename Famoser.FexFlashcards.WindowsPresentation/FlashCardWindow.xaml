@@ -14,6 +14,7 @@
 
     <Window.Resources>
         <converter:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
+        <converter:PathToTextConverter x:Key="PathToTextConverter" />
         <converter:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </Window.Resources>
 
@@ -42,18 +43,19 @@
 
                 <Button VerticalAlignment="Center" HorizontalAlignment="Right" Command="{Binding StartCommand}" Content="Start" />
                 <ProgressBar Visibility="{Binding ActiveFlashcard, Converter={StaticResource NullToVisibilityConverter}}" Grid.Row="1" Maximum="{Binding TotalFlashcardNumber}" Value="{Binding ActiveFlashcardNumber}" />
-                <Button Content="To Definition" Command="{Binding ShowBackSideCommand}" HorizontalAlignment="Center" VerticalAlignment="Bottom" />
             </Grid>
 
-            <Grid Grid.Row="1" Visibility="{Binding ShowBackSide, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=invert}" IsEnabled="False">
+            <Grid Grid.Row="1" Visibility="{Binding ShowBackSide, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=invert}">
                 <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Margin="30" Text="{Binding ActiveFlashcard.Title}" />
                 <TextBlock Text="{Binding ActiveFlashcard.ContentLineCount}" HorizontalAlignment="Right" />
+                <TextBlock Text="{Binding ActiveFlashcard.Path, Converter={StaticResource PathToTextConverter}}" HorizontalAlignment="Left" />
                 <Button Content="To Definition" Command="{Binding ShowBackSideCommand}" HorizontalAlignment="Center" VerticalAlignment="Bottom" />
             </Grid>
 
             <Grid Grid.Row="1" Visibility="{Binding ShowBackSide, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Margin="30" Text="{Binding ActiveFlashcard.Content}" />
                 <TextBlock Text="{Binding ActiveFlashcard.ContentLineCount}" HorizontalAlignment="Right" />
+                <Button Content="To Term" Command="{Binding ShowBackSideCommand}" HorizontalAlignment="Center" VerticalAlignment="Bottom" />
             </Grid>
 
             <Grid Grid.Row="2">

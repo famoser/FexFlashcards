@@ -63,6 +63,7 @@ namespace Famoser.FexFlashcards.WindowsPresentation.ViewModel
             GoToNextCommand.RaiseCanExecuteChanged();
             PutLevelDownCommand.RaiseCanExecuteChanged();
             PutLevelUpCommand.RaiseCanExecuteChanged();
+            ShowBackSideCommand.RaiseCanExecuteChanged();
         }
 
         public RelayCommand ShowBackSideCommand

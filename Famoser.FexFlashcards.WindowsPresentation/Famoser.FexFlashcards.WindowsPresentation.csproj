@@ -82,6 +82,7 @@
     <Compile Include="Converter\LevelInputConverter.cs" />
     <Compile Include="Converter\BooleanToVisibilityConverter.cs" />
     <Compile Include="Converter\NullToVisibilityConverter.cs" />
+    <Compile Include="Converter\PathToTextConverter.cs" />
     <Compile Include="Data\ConfigurationEntity.cs" />
     <Compile Include="Data\Converter\EntityModelConverter.cs" />
     <Compile Include="Data\Converter\ModelEntityConverter.cs" />

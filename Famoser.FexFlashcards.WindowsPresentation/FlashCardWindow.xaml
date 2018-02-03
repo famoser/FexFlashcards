@@ -7,21 +7,26 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:converter="clr-namespace:Famoser.FexFlashcards.WindowsPresentation.Converter"
     Title="FlashCardWindow"
-    Width="300"
-    Height="300"
+    Width="600"
+    Height="600"
     DataContext="{Binding FlashCardViewModel, Source={StaticResource Locator}}"
-    mc:Ignorable="d">
+    
+    mc:Ignorable="d" KeyDown="Window_KeyDown">
 
     <Window.Resources>
-        <converter:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
-        <converter:PathToTextConverter x:Key="PathToTextConverter" />
-        <converter:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <Style TargetType="Button" x:Key="NavigationKeys">
+            <Setter Property="Padding" Value="20" />
+        </Style>
+        <Style TargetType="Button" x:Key="TurnButton">
+            <Setter Property="Padding" Value="20" />
+            <Setter Property="Margin" Value="10" />
+        </Style>
     </Window.Resources>
 
 
     <Grid>
         <Grid Visibility="{Binding ActiveFlashcard, Converter={StaticResource NullToVisibilityConverter}, ConverterParameter=invert}">
-            <Button VerticalAlignment="Center" HorizontalAlignment="Center" Command="{Binding StartCommand}" Content="Start" />
+            <TextBlock Text="Level empty :(" />
         </Grid>
         <Grid Visibility="{Binding ActiveFlashcard, Converter={StaticResource NullToVisibilityConverter}}">
             <Grid.RowDefinitions>
@@ -33,29 +38,50 @@
             <Grid Grid.Row="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
+                    <RowDefinition Height="20" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <TextBlock>
-                <Run Text="{Binding FlashCardCollection.Title}" />
-                <Run Text="- Level" />
-                <Run Text="{Binding Level}" />
+                <TextBlock FontSize="20">
+                    <Run Text="{Binding FlashCardCollection.Title}" />
+                    <Run Text="- Level" />
+                    <Run Text="{Binding Level}" />
+                    <Run Text="-" />
+                    <Run Text="{Binding ActiveFlashcardNumber}" /><Run Text="/" /><Run Text="{Binding TotalFlashcardNumber}" />
                 </TextBlock>
 
-                <Button VerticalAlignment="Center" HorizontalAlignment="Right" Command="{Binding StartCommand}" Content="Start" />
-                <ProgressBar Visibility="{Binding ActiveFlashcard, Converter={StaticResource NullToVisibilityConverter}}" Grid.Row="1" Maximum="{Binding TotalFlashcardNumber}" Value="{Binding ActiveFlashcardNumber}" />
+                <ProgressBar Grid.Row="2" Height="10" Visibility="{Binding ActiveFlashcard, Converter={StaticResource NullToVisibilityConverter}}" Maximum="{Binding TotalFlashcardNumber}" Value="{Binding ActiveFlashcardNumber}" />
             </Grid>
 
-            <Grid Grid.Row="1" Visibility="{Binding ShowBackSide, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=invert}">
-                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Margin="30" Text="{Binding ActiveFlashcard.Title}" />
-                <TextBlock Text="{Binding ActiveFlashcard.ContentLineCount}" HorizontalAlignment="Right" />
-                <TextBlock Text="{Binding ActiveFlashcard.Path, Converter={StaticResource PathToTextConverter}}" HorizontalAlignment="Left" />
-                <Button Content="To Definition" Command="{Binding ShowBackSideCommand}" HorizontalAlignment="Center" VerticalAlignment="Bottom" />
+            <Grid Grid.Row="1" Visibility="{Binding ShowBackSide, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=invert}" >
+                <Grid Margin="40">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="80" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="1" Grid.Column="0" FontSize="15" Text="{Binding ActiveFlashcard.Path}" />
+                    <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" FontSize="10">
+                        <Run Text="(" /><Run Text="{Binding ActiveFlashcard.ContentLineCount}" />
+                        <Run Text="entries)" />
+                    </TextBlock>
+                    <Viewbox HorizontalAlignment="Left" MaxHeight="90" Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="0">
+                        <TextBlock FontSize="50" Text="{Binding ActiveFlashcard.Title}" Margin="-4,-10,0,0" />
+                    </Viewbox>
+                </Grid>
+                <Button Style="{StaticResource TurnButton}" Content="To Definition" Command="{Binding ShowBackSideCommand}" HorizontalAlignment="Center" VerticalAlignment="Bottom" />
             </Grid>
 
             <Grid Grid.Row="1" Visibility="{Binding ShowBackSide, Converter={StaticResource BooleanToVisibilityConverter}}">
-                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Margin="30" Text="{Binding ActiveFlashcard.Content}" />
-                <TextBlock Text="{Binding ActiveFlashcard.ContentLineCount}" HorizontalAlignment="Right" />
-                <Button Content="To Term" Command="{Binding ShowBackSideCommand}" HorizontalAlignment="Center" VerticalAlignment="Bottom" />
+                <Viewbox Margin="40,120,40,20" VerticalAlignment="Top" HorizontalAlignment="Left" MaxHeight="230">
+                    <TextBlock TextWrapping="Wrap" Text="{Binding ActiveFlashcard.Content}" />
+                </Viewbox>
+                <Button Style="{StaticResource TurnButton}" Content="To Term" Command="{Binding ShowBackSideCommand}" HorizontalAlignment="Center" VerticalAlignment="Bottom" />
             </Grid>
 
             <Grid Grid.Row="2">
@@ -68,10 +94,10 @@
                     <ColumnDefinition Width="10" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Button Command="{Binding GoToPreviousCommand}" Content="Previous" />
-                <Button Grid.Column="2" Command="{Binding PutLevelUpCommand}" Content="Level up" />
-                <Button Grid.Column="4" Command="{Binding PutLevelDownCommand}" Content="Level down" />
-                <Button Grid.Column="6" Command="{Binding GoToNextCommand}" Content="Next" />
+                <Button Command="{Binding GoToPreviousCommand}" Content="Previous" Style="{StaticResource NavigationKeys}" />
+                <Button Grid.Column="2" Command="{Binding PutLevelUpCommand}" Content="Level up" Style="{StaticResource NavigationKeys}" />
+                <Button Grid.Column="4" Command="{Binding PutLevelDownCommand}" Content="Level down" Style="{StaticResource NavigationKeys}" />
+                <Button Grid.Column="6" Command="{Binding GoToNextCommand}" Content="Next" Style="{StaticResource NavigationKeys}" />
             </Grid>
 
         </Grid>

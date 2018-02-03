@@ -21,12 +21,19 @@ namespace Famoser.FexFlashcards.WindowsPresentation.Business.Models
             get => _timesOpened;
             set => Set(ref _timesOpened, value);
         }
-        
-        private int _timesPlayed;
-        public int TimesPlayed
+
+        private int _roundsCompleted;
+        public int RoundsCompleted
         {
-            get => _timesPlayed;
-            set => Set(ref _timesPlayed, value);
+            get => _roundsCompleted;
+            set => Set(ref _roundsCompleted, value);
+        }
+
+        private int _cardsSeen;
+        public int CardsSeen
+        {
+            get => _cardsSeen;
+            set => Set(ref _cardsSeen, value);
         }
 
         public string CardsHistoryPath { get; set; }

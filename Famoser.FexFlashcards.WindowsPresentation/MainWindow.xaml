@@ -16,7 +16,7 @@
     <Window.Resources>
         <converter:StringIntConverter x:Key="StringIntConverter" />
         <DataTemplate x:Key="CollectionDataTemplate" DataType="models:FlashCardCollectionModel">
-            <Grid>
+            <Grid Height="20" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="10" />
@@ -26,6 +26,8 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="{Binding Title}" />
                 <TextBlock Grid.Column="2">
+                    <Run Text="cards seen:" />
+                    <Run Text="{Binding SeenCards}" />
                     <Run Text="opened:" />
                     <Run Text="{Binding TimesOpened}" />
                     <Run Text="rounds played:" />
@@ -58,14 +60,16 @@
                 </Style>
             </ListView.ItemContainerStyle>
         </ListView>
-        <TextBlock Grid.Row="4" Text="choose your difficuly level and press start:" />
-        <StackPanel Grid.Row="5" Orientation="Horizontal">
-            <TextBlock Margin="0,1,10,0">
+        <StackPanel Grid.Row="4" Visibility="{Binding Selected, Converter={StaticResource NullToVisibilityConverter}}">
+            <TextBlock Text="choose your difficuly level and press start:" />
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Margin="0,1,10,0">
                 <Run Text="0 -" />
                 <Run Text="{Binding MaxLevel}" />
-            </TextBlock>
-            <TextBox InputScope="Number" Width="50" Text="{Binding SelectedLevel, Converter={StaticResource StringIntConverter}}" />
-            <Button Command="{Binding StartTrainingCommand}" Margin="10,0" Width="80" Content="Lets go!" />
+                </TextBlock>
+                <TextBox InputScope="Number" Width="50" Text="{Binding SelectedLevel, Converter={StaticResource StringIntConverter}}" />
+                <Button Command="{Binding StartTrainingCommand}" Margin="10,0" Width="80" Content="Lets go!" />
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Window>

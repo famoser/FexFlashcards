@@ -30,7 +30,7 @@ namespace Famoser.FexFlashcards.WindowsPresentation.Business.Repositories.Mock
             return new FlashCardCollectionModel()
             {
                 Hash = "my random hash",
-                TimesPlayed = _random.Next(),
+                RoundsCompleted = _random.Next(),
                 ChangedAt = new DateTime(2018, 1, 1),
                 TimesOpened = _random.Next(),
                 Title = "Network Security",
@@ -48,9 +48,9 @@ namespace Famoser.FexFlashcards.WindowsPresentation.Business.Repositories.Mock
             return new FlashCardModel()
             {
                 Hash = "my random hash",
-                TimesPlayed = _random.Next(),
-                ContentLineCount = _random.Next(),
-                Content = "mein text ist lage \nund hat textumbrüche",
+                TimesSeen = _random.Next(),
+                ContentLineCount = 2,
+                Content = "mein text \nund hat text\nund hat text\nund hat text\nund hat text\nund hat text\nund hat text\nund hat text",
                 DifficultyLevel = 0,
                 Path = "Titel → Begriff → dinge",
                 Title = "Network Security"

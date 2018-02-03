@@ -16,7 +16,7 @@ namespace Famoser.FexFlashcards.WindowsPresentation.Data.Converter
             {
                 Hash = model.Hash,
                 TimesOpened = model.TimesOpened,
-                TimesPlayed = model.TimesPlayed
+                TimesPlayed = model.RoundsCompleted
             };
 
             foreach (var modelFlashCardModel in model.FlashCardModels)
@@ -24,7 +24,7 @@ namespace Famoser.FexFlashcards.WindowsPresentation.Data.Converter
                 var flashEntity = new FlashCardStatisticsEntity()
                 {
                     Hash = modelFlashCardModel.Hash,
-                    TimesPlayed = modelFlashCardModel.TimesPlayed,
+                    TimesPlayed = modelFlashCardModel.TimesSeen,
                     DifficultyLevel = modelFlashCardModel.DifficultyLevel
                 };
 

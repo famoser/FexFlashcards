@@ -15,11 +15,11 @@ namespace Famoser.FexFlashcards.WindowsPresentation.Business.Models
         public int ContentLineCount { get; set; }
         public string Path { get; set; }
 
-        private int _timesPlayed;
-        public int TimesPlayed
+        private int _timesSeen;
+        public int TimesSeen
         {
-            get => _timesPlayed;
-            set => Set(ref _timesPlayed, value);
+            get => _timesSeen;
+            set => Set(ref _timesSeen, value);
         }
 
         private bool _isNew;

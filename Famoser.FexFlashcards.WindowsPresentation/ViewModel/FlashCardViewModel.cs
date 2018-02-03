@@ -22,9 +22,8 @@ namespace Famoser.FexFlashcards.WindowsPresentation.ViewModel
 
             if (IsInDesignModeStatic)
             {
-                FlashCardCollection = _flashCardRepository.GetFlashCardCollections()[0];
-                Level = 0;
-                StartCommand.Execute(null);
+                SetFlashCardCollection(_flashCardRepository.GetFlashCardCollections()[0], 0);
+                ShowBackSide = true;
             }
         }
 
@@ -45,16 +44,9 @@ namespace Famoser.FexFlashcards.WindowsPresentation.ViewModel
         internal void SetFlashCardCollection(FlashCardCollectionModel collection, int selectedLevel)
         {
             FlashCardCollection = collection;
+            FlashCardCollection.TimesOpened++;
             Level = selectedLevel;
-        }
-
-        public ICommand StartCommand
-        {
-            get => new RelayCommand(Start);
-        }
-
-        private void Start()
-        {
+            
             FlashCards = new ObservableCollection<FlashCardModel>(FlashCardCollection.FlashCardModels.Where(f => f.DifficultyLevel == Level));
             ActiveFlashcard = FlashCards.FirstOrDefault();
             ActiveFlashcardNumber = 1;
@@ -64,6 +56,8 @@ namespace Famoser.FexFlashcards.WindowsPresentation.ViewModel
             PutLevelDownCommand.RaiseCanExecuteChanged();
             PutLevelUpCommand.RaiseCanExecuteChanged();
             ShowBackSideCommand.RaiseCanExecuteChanged();
+            
+            _flashCardRepository.SaveFor(FlashCardCollection);
         }
 
         public RelayCommand ShowBackSideCommand
@@ -82,6 +76,15 @@ namespace Famoser.FexFlashcards.WindowsPresentation.ViewModel
             ActiveFlashcard = FlashCards[ActiveFlashcardNumber];
             ActiveFlashcardNumber++;
             GoToNextCommand.RaiseCanExecuteChanged();
+
+            //statistics
+            ActiveFlashcard.TimesSeen++;
+            FlashCardCollection.CardsSeen++;
+            if (ActiveFlashcardNumber == FlashCards.Count)
+            {
+                FlashCardCollection.RoundsCompleted++;
+            }
+            _flashCardRepository.SaveFor(FlashCardCollection);
         }
 
         public RelayCommand GoToPreviousCommand
@@ -95,6 +98,11 @@ namespace Famoser.FexFlashcards.WindowsPresentation.ViewModel
             ActiveFlashcardNumber--;
             ActiveFlashcard = FlashCards[ActiveFlashcardNumber - 1];
             GoToPreviousCommand.RaiseCanExecuteChanged();
+
+            //statistics
+            FlashCardCollection.CardsSeen++;
+            ActiveFlashcard.TimesSeen++;
+            _flashCardRepository.SaveFor(FlashCardCollection);
         }
 
         public RelayCommand PutLevelUpCommand
@@ -105,12 +113,15 @@ namespace Famoser.FexFlashcards.WindowsPresentation.ViewModel
         private void PutLevelUp()
         {
             ActiveFlashcard.DifficultyLevel++;
-            NavigateAway();
+            DifficultyLevelChanged();
         }
 
-        private void NavigateAway()
+        private void DifficultyLevelChanged()
         {
+            _flashCardRepository.SaveFor(FlashCardCollection);
             FlashCards.Remove(ActiveFlashcard);
+            TotalFlashcardNumber--;
+            ActiveFlashcardNumber--;
             if (GoToNextCommand.CanExecute(null))
             {
                 GoToNextCommand.Execute(null);
@@ -133,16 +144,16 @@ namespace Famoser.FexFlashcards.WindowsPresentation.ViewModel
         private void PutLevelDown()
         {
             ActiveFlashcard.DifficultyLevel--;
-            NavigateAway();
+            DifficultyLevelChanged();
         }
-        
+
         private FlashCardModel _activeFlashcard;
         public FlashCardModel ActiveFlashcard
         {
             get => _activeFlashcard;
             set => Set(ref _activeFlashcard, value);
         }
-        
+
         private ObservableCollection<FlashCardModel> _flashCards;
         public ObservableCollection<FlashCardModel> FlashCards
         {

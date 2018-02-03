@@ -24,7 +24,7 @@
     </Window.Resources>
 
 
-    <Grid>
+    <Grid Margin="10">
         <Grid Visibility="{Binding ActiveFlashcard, Converter={StaticResource NullToVisibilityConverter}, ConverterParameter=invert}">
             <TextBlock Text="Level empty :(" />
         </Grid>

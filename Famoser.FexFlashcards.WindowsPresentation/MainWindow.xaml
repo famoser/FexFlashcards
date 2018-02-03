@@ -8,15 +8,20 @@
     xmlns:models="clr-namespace:Famoser.FexFlashcards.WindowsPresentation.Business.Models"
     xmlns:converter="clr-namespace:Famoser.FexFlashcards.WindowsPresentation.Converter"
     Title="MainWindow"
-    Width="600"
-    Height="350"
+    Width="800"
+    Height="450"
     DataContext="{Binding Main, Source={StaticResource Locator}}"
     mc:Ignorable="d">
 
     <Window.Resources>
         <converter:StringIntConverter x:Key="StringIntConverter" />
         <DataTemplate x:Key="CollectionDataTemplate" DataType="models:FlashCardCollectionModel">
-            <Grid Height="20" >
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="5" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="5" />
+                </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="10" />
@@ -24,21 +29,21 @@
                     <ColumnDefinition Width="10" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="{Binding Title}" />
-                <TextBlock Grid.Column="2">
+                <TextBlock Grid.Row="1" Text="{Binding Title}" />
+                <TextBlock Grid.Row="1" Grid.Column="2">
                     <Run Text="cards seen:" />
-                    <Run Text="{Binding SeenCards}" />
+                    <Run Text="{Binding CardsSeen}" />
                     <Run Text="opened:" />
                     <Run Text="{Binding TimesOpened}" />
                     <Run Text="rounds played:" />
                     <Run Text="{Binding TimesPlayed}" />
                 </TextBlock>
-                <TextBlock Grid.Column="4" Text="{Binding ChangedAt, Converter={StaticResource DateTimeConverter}}" />
+                <TextBlock Grid.Row="1" Grid.Column="4" Text="{Binding ChangedAt, Converter={StaticResource DateTimeConverter}}" />
             </Grid>
         </DataTemplate>
     </Window.Resources>
 
-    <Grid>
+    <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -60,15 +65,15 @@
                 </Style>
             </ListView.ItemContainerStyle>
         </ListView>
-        <StackPanel Grid.Row="4" Visibility="{Binding Selected, Converter={StaticResource NullToVisibilityConverter}}">
+        <StackPanel Grid.Row="4"  Visibility="{Binding Selected, Converter={StaticResource NullToVisibilityConverter}}">
             <TextBlock Text="choose your difficuly level and press start:" />
             <StackPanel Orientation="Horizontal">
-                <TextBlock Margin="0,1,10,0">
+                <TextBlock FontSize="20" Margin="0,4,10,0">
                 <Run Text="0 -" />
                 <Run Text="{Binding MaxLevel}" />
                 </TextBlock>
-                <TextBox InputScope="Number" Width="50" Text="{Binding SelectedLevel, Converter={StaticResource StringIntConverter}}" />
-                <Button Command="{Binding StartTrainingCommand}" Margin="10,0" Width="80" Content="Lets go!" />
+                <TextBox InputScope="Number" Width="50" FontSize="20" Padding="0,4,0,0" Text="{Binding SelectedLevel, Converter={StaticResource StringIntConverter}}" />
+                <Button Command="{Binding StartTrainingCommand}" Padding="10" Margin="10,0" Width="80" Content="Lets go!" />
             </StackPanel>
         </StackPanel>
     </Grid>

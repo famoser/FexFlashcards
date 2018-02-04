@@ -3,10 +3,8 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:Famoser.FexFlashcards.WindowsPresentation"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:models="clr-namespace:Famoser.FexFlashcards.WindowsPresentation.Business.Models"
-    xmlns:converter="clr-namespace:Famoser.FexFlashcards.WindowsPresentation.Converter"
     Title="MainWindow"
     Width="800"
     Height="450"
@@ -14,7 +12,6 @@
     mc:Ignorable="d">
 
     <Window.Resources>
-        <converter:StringIntConverter x:Key="StringIntConverter" />
         <DataTemplate x:Key="CollectionDataTemplate" DataType="models:FlashCardCollectionModel">
             <Grid>
                 <Grid.RowDefinitions>
@@ -38,7 +35,10 @@
                     <Run Text="rounds played:" />
                     <Run Text="{Binding RoundsCompleted}" />
                 </TextBlock>
-                <TextBlock Grid.Row="1" Grid.Column="4" Text="{Binding ChangedAt, Converter={StaticResource DateTimeConverter}}" />
+                <TextBlock
+                    Grid.Row="1"
+                    Grid.Column="4"
+                    Text="{Binding ChangedAt, Converter={StaticResource DateTimeConverter}}" />
             </Grid>
         </DataTemplate>
     </Window.Resources>
@@ -55,7 +55,8 @@
         <TextBlock Grid.Row="0" Text="choose the path to look for" />
         <TextBox Grid.Row="1" Text="{Binding BasePath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
         <TextBlock Grid.Row="2" Text="what do you want to train next?" />
-        <ListView  Grid.Row="3"
+        <ListView
+            Grid.Row="3"
             ItemTemplate="{StaticResource CollectionDataTemplate}"
             ItemsSource="{Binding FlashCardCollections}"
             SelectedItem="{Binding Selected, Mode=TwoWay}">
@@ -68,13 +69,23 @@
         <StackPanel Grid.Row="4" Visibility="{Binding Selected, Converter={StaticResource NullToVisibilityConverter}}">
             <TextBlock Text="choose your difficuly level and press start:" />
             <StackPanel Orientation="Horizontal">
-                <TextBlock FontSize="20" Margin="0,4,10,0">
+                <TextBlock Margin="0,4,10,0" FontSize="20">
                     <Run Text="{Binding MinLevel}" />
                     <Run Text="-" />
                     <Run Text="{Binding MaxLevel}" />
                 </TextBlock>
-                <TextBox InputScope="Number" Width="50" FontSize="20" Padding="0,4,0,0" Text="{Binding SelectedLevel, Converter={StaticResource StringIntConverter}}" />
-                <Button Command="{Binding StartTrainingCommand}" Padding="10" Margin="10,0" Width="80" Content="Lets go!" />
+                <TextBox
+                    Width="50"
+                    Padding="0,4,0,0"
+                    FontSize="20"
+                    InputScope="Number"
+                    Text="{Binding SelectedLevel, Converter={StaticResource StringIntConverter}}" />
+                <Button
+                    Width="80"
+                    Margin="10,0"
+                    Padding="10"
+                    Command="{Binding StartTrainingCommand}"
+                    Content="Lets go!" />
             </StackPanel>
         </StackPanel>
     </Grid>

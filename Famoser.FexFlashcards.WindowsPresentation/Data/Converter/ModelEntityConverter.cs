@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Famoser.FexFlashcards.WindowsPresentation.Business.Models;
+﻿using Famoser.FexFlashcards.WindowsPresentation.Business.Models;
 using Famoser.FexFlashcards.WindowsPresentation.Data.Entity.Statistics;
 
 namespace Famoser.FexFlashcards.WindowsPresentation.Data.Converter

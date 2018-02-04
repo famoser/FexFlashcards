@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
 using Famoser.FexFlashcards.WindowsPresentation.Business.Models;
 using Famoser.FexFlashcards.WindowsPresentation.Business.Repositories.Interfaces;
 using GalaSoft.MvvmLight;
@@ -177,11 +172,37 @@ namespace Famoser.FexFlashcards.WindowsPresentation.ViewModel
             set => Set(ref _totalFlashcardNumber, value);
         }
 
+        private int _jumpFlashcardNumber;
+        public int JumpFlashcardNumber
+        {
+            get => _jumpFlashcardNumber;
+            set => Set(ref _jumpFlashcardNumber, value);
+        }
+
         private bool _showBackSide;
         public bool ShowBackSide
         {
             get => _showBackSide;
             set => Set(ref _showBackSide, value);
+        }
+
+        public RelayCommand JumpToFlashcardNumberCommand
+        {
+            get => new RelayCommand(JumpToFlashcardNumber, () => ActiveFlashcard != null);
+        }
+
+        private void JumpToFlashcardNumber()
+        {
+            ShowBackSide = false;
+            ActiveFlashcardNumber = JumpFlashcardNumber;
+            ActiveFlashcard = FlashCards[JumpFlashcardNumber - 1];
+            GoToPreviousCommand.RaiseCanExecuteChanged();
+            GoToNextCommand.RaiseCanExecuteChanged();
+
+            //statistics
+            FlashCardCollection.CardsSeen++;
+            ActiveFlashcard.TimesSeen++;
+            _flashCardRepository.SaveFor(FlashCardCollection);
         }
     }
 }

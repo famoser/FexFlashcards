@@ -20,6 +20,7 @@
             <converter:PathToTextConverter x:Key="PathToTextConverter" />
             <converter:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
             <converter:EnumerableVisibilityConverter x:Key="EnumerableVisibilityConverter" />
+            <converter:StringIntConverter x:Key="StringIntConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -53,7 +53,7 @@ namespace Famoser.FexFlashcards.WindowsPresentation.ViewModel
             PutLevelDownCommand.RaiseCanExecuteChanged();
             PutLevelUpCommand.RaiseCanExecuteChanged();
             ShowBackSideCommand.RaiseCanExecuteChanged();
-            
+
             _flashCardRepository.SaveFor(FlashCardCollection);
         }
 
@@ -176,7 +176,13 @@ namespace Famoser.FexFlashcards.WindowsPresentation.ViewModel
         public int JumpFlashcardNumber
         {
             get => _jumpFlashcardNumber;
-            set => Set(ref _jumpFlashcardNumber, value);
+            set
+            {
+                if (Set(ref _jumpFlashcardNumber, value))
+                {
+                    JumpToFlashcardNumberCommand.RaiseCanExecuteChanged();
+                }
+            }
         }
 
         private bool _showBackSide;
@@ -188,7 +194,7 @@ namespace Famoser.FexFlashcards.WindowsPresentation.ViewModel
 
         public RelayCommand JumpToFlashcardNumberCommand
         {
-            get => new RelayCommand(JumpToFlashcardNumber, () => ActiveFlashcard != null);
+            get => new RelayCommand(JumpToFlashcardNumber, () => ActiveFlashcard != null && JumpFlashcardNumber > 0 && JumpFlashcardNumber <= FlashCards.Count);
         }
 
         private void JumpToFlashcardNumber()

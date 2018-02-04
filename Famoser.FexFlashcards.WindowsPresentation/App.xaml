@@ -19,6 +19,7 @@
             <converter:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
             <converter:PathToTextConverter x:Key="PathToTextConverter" />
             <converter:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+            <converter:EnumerableVisibilityConverter x:Key="EnumerableVisibilityConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>

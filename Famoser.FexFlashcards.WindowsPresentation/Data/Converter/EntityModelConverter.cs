@@ -42,8 +42,9 @@ namespace Famoser.FexFlashcards.WindowsPresentation.Data.Converter
         public static void AttachStatisticInfos(FlashCardCollectionModel model,
             FlashCardCollectionStatisticsEntity statistics)
         {
-            model.RoundsCompleted = statistics.TimesPlayed;
+            model.RoundsCompleted = statistics.RoundsCompleted;
             model.TimesOpened = statistics.TimesOpened;
+            model.CardsSeen = statistics.CardsSeen;
 
             //match cards with statistics
             var matchings = from t1 in model.FlashCardModels

@@ -16,7 +16,8 @@ namespace Famoser.FexFlashcards.WindowsPresentation.Data.Converter
             {
                 Hash = model.Hash,
                 TimesOpened = model.TimesOpened,
-                TimesPlayed = model.RoundsCompleted
+                RoundsCompleted = model.RoundsCompleted,
+                CardsSeen = model.CardsSeen
             };
 
             foreach (var modelFlashCardModel in model.FlashCardModels)

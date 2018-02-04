@@ -61,6 +61,7 @@ namespace Famoser.FexFlashcards.WindowsPresentation.ViewModel
                     if (_selected != null)
                     {
                         MaxLevel = Selected.FlashCardModels.Max(s => s.DifficultyLevel);
+                        MinLevel = Selected.FlashCardModels.Min(s => s.DifficultyLevel);
                     }
                 }
             }
@@ -74,6 +75,12 @@ namespace Famoser.FexFlashcards.WindowsPresentation.ViewModel
             set => Set(ref _maxLevel, value);
         }
 
+        private int _minLevel;
+        public int MinLevel
+        {
+            get => _minLevel;
+            set => Set(ref _minLevel, value);
+        }
 
         private int _selectedLevel;
         public int SelectedLevel

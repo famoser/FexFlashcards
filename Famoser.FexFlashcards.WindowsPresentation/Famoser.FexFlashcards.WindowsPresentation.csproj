@@ -31,7 +31,7 @@
     <PublisherName>Florian Moser</PublisherName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>4</ApplicationRevision>
+    <ApplicationRevision>5</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -114,6 +114,7 @@
     <Compile Include="Business\Repositories\Interfaces\IFlashCardRepository.cs" />
     <Compile Include="Business\Repositories\Mock\FlashCardRepositoryMock.cs" />
     <Compile Include="Converter\DateTimeConverter.cs" />
+    <Compile Include="Converter\LevelInputConverter - Copy.cs" />
     <Compile Include="Converter\LevelInputConverter.cs" />
     <Compile Include="Converter\BooleanToVisibilityConverter.cs" />
     <Compile Include="Converter\NullToVisibilityConverter.cs" />

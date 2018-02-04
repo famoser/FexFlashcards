@@ -10,7 +10,8 @@ namespace Famoser.FexFlashcards.WindowsPresentation.Data.Entity.Statistics
     {
         public string Hash { get; set; }
         public int TimesOpened { get; set; }
-        public int TimesPlayed { get; set; }
+        public int RoundsCompleted { get; set; }
         public List<FlashCardStatisticsEntity> FlashCardStatisticsEntity { get; } = new List<FlashCardStatisticsEntity>();
+        public int CardsSeen { get; internal set; }
     }
 }

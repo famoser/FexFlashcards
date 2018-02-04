@@ -46,8 +46,10 @@ namespace Famoser.FexFlashcards.WindowsPresentation.ViewModel
             FlashCardCollection = collection;
             FlashCardCollection.TimesOpened++;
             Level = selectedLevel;
-            
+
+            //if -1, user clicked "only new"
             FlashCards = new ObservableCollection<FlashCardModel>(FlashCardCollection.FlashCardModels.Where(f => f.DifficultyLevel == Level));
+
             ActiveFlashcard = FlashCards.FirstOrDefault();
             ActiveFlashcardNumber = 1;
             TotalFlashcardNumber = FlashCards.Count;
@@ -138,7 +140,7 @@ namespace Famoser.FexFlashcards.WindowsPresentation.ViewModel
 
         public RelayCommand PutLevelDownCommand
         {
-            get => new RelayCommand(PutLevelDown, () => ActiveFlashcard != null && Level > 0);
+            get => new RelayCommand(PutLevelDown, () => ActiveFlashcard != null);
         }
 
         private void PutLevelDown()

@@ -36,7 +36,7 @@
                     <Run Text="opened:" />
                     <Run Text="{Binding TimesOpened}" />
                     <Run Text="rounds played:" />
-                    <Run Text="{Binding TimesPlayed}" />
+                    <Run Text="{Binding RoundsCompleted}" />
                 </TextBlock>
                 <TextBlock Grid.Row="1" Grid.Column="4" Text="{Binding ChangedAt, Converter={StaticResource DateTimeConverter}}" />
             </Grid>
@@ -65,12 +65,13 @@
                 </Style>
             </ListView.ItemContainerStyle>
         </ListView>
-        <StackPanel Grid.Row="4"  Visibility="{Binding Selected, Converter={StaticResource NullToVisibilityConverter}}">
+        <StackPanel Grid.Row="4" Visibility="{Binding Selected, Converter={StaticResource NullToVisibilityConverter}}">
             <TextBlock Text="choose your difficuly level and press start:" />
             <StackPanel Orientation="Horizontal">
                 <TextBlock FontSize="20" Margin="0,4,10,0">
-                <Run Text="0 -" />
-                <Run Text="{Binding MaxLevel}" />
+                    <Run Text="{Binding MinLevel}" />
+                    <Run Text="-" />
+                    <Run Text="{Binding MaxLevel}" />
                 </TextBlock>
                 <TextBox InputScope="Number" Width="50" FontSize="20" Padding="0,4,0,0" Text="{Binding SelectedLevel, Converter={StaticResource StringIntConverter}}" />
                 <Button Command="{Binding StartTrainingCommand}" Padding="10" Margin="10,0" Width="80" Content="Lets go!" />

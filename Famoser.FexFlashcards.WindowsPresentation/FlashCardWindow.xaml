@@ -123,8 +123,7 @@
 
             <Grid Grid.Row="1" Visibility="{Binding ShowBackSide, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <Viewbox
-                    MaxHeight="230"
-                    Margin="40,120,40,20"
+                    Margin="40,120,40,120"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top">
                     <TextBlock Text="{Binding ActiveFlashcard.Content}" TextWrapping="Wrap" />

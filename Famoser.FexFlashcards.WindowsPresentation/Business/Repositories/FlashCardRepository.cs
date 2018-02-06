@@ -92,15 +92,10 @@ namespace Famoser.FexFlashcards.WindowsPresentation.Business.Repositories
             File.WriteAllText(configFilePath, JsonConvert.SerializeObject(_configurationEntity));
         }
 
-        public void LoadFor(FlashCardCollectionModel flashCardCollectionModel)
-        {
-            flashCardCollectionModel.TimesOpened += 1;
-        }
-
         public void SaveFor(FlashCardCollectionModel flashCardCollectionModel)
         {
             var statistics = ModelEntityConverter.ConvertToFlashCardCollectionStatisticsEntity(flashCardCollectionModel);
-            File.WriteAllText(flashCardCollectionModel.CardsHistoryPath, JsonConvert.SerializeObject(statistics));
+            File.WriteAllText(flashCardCollectionModel.CardsHistoryPath, JsonConvert.SerializeObject(statistics, Formatting.Indented));
         }
     }
 }

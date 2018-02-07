@@ -164,7 +164,7 @@ namespace Famoser.FexFlashcards.WindowsPresentation.ViewModel
             get => _activeFlashcardNumber;
             set => Set(ref _activeFlashcardNumber, value);
         }
-
+        
         private int _totalFlashcardNumber;
         public int TotalFlashcardNumber
         {

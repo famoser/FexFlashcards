@@ -124,6 +124,7 @@
 
             <Grid Grid.Row="2">
                 <Button
+                    Visibility="{Binding ShowBackSide, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=invert}"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Bottom"
                     Command="{Binding ShowBackSideCommand}"

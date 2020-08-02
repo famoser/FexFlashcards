@@ -33,6 +33,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="0">
@@ -75,60 +76,62 @@
                     Value="{Binding ActiveFlashcardNumber}" />
             </Grid>
 
-            <Grid Grid.Row="1" Visibility="{Binding ShowBackSide, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=invert}">
-                <Grid Margin="40">
+            <Grid Grid.Row="1">
+                <Grid Margin="0, 40">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="80" />
                         <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="20" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
 
                     <TextBlock
-                        Grid.Row="1"
+                        Grid.Row="0"
                         Grid.Column="0"
                         FontSize="15"
                         Text="{Binding ActiveFlashcard.Path}" />
                     <TextBlock
-                        Grid.Row="1"
+                        Grid.Row="0"
                         Grid.Column="1"
                         HorizontalAlignment="Right"
-                        FontSize="10">
+                        FontSize="12">
                         <Run Text="(" /><Run Text="{Binding ActiveFlashcard.ContentLineCount}" />
                         <Run Text="entries)" />
                     </TextBlock>
                     <Viewbox
+                        Visibility="{Binding ShowBackSide, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=invert}"
                         Grid.Row="2"
                         Grid.Column="0"
                         Grid.ColumnSpan="2"
-                        MaxHeight="90"
                         HorizontalAlignment="Left">
                         <TextBlock
-                            Margin="-4,-10,0,0"
-                            FontSize="50"
                             Text="{Binding ActiveFlashcard.Title}" />
                     </Viewbox>
+
+                    <Viewbox
+                        Visibility="{Binding ShowBackSide, Converter={StaticResource BooleanToVisibilityConverter}}"
+                        Grid.Row="2"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        HorizontalAlignment="Left">
+                        <TextBlock Text="{Binding ActiveFlashcard.Content}" />
+                    </Viewbox>
                 </Grid>
+            </Grid>
+
+            <Grid Grid.Row="2">
                 <Button
                     HorizontalAlignment="Center"
                     VerticalAlignment="Bottom"
                     Command="{Binding ShowBackSideCommand}"
                     Content="To Definition"
                     Style="{StaticResource TurnButton}" />
-            </Grid>
 
-            <Grid Grid.Row="1" Visibility="{Binding ShowBackSide, Converter={StaticResource BooleanToVisibilityConverter}}">
-                <Viewbox
-                    Margin="40,120,40,120"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top">
-                    <TextBlock Text="{Binding ActiveFlashcard.Content}" TextWrapping="Wrap" />
-                </Viewbox>
                 <Button
+                    Visibility="{Binding ShowBackSide, Converter={StaticResource BooleanToVisibilityConverter}}"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Bottom"
                     Command="{Binding ShowBackSideCommand}"
@@ -136,7 +139,7 @@
                     Style="{StaticResource TurnButton}" />
             </Grid>
 
-            <Grid Grid.Row="2">
+            <Grid Grid.Row="3">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="10" />

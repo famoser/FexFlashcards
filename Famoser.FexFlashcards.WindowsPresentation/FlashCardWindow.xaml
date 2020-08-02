@@ -91,13 +91,13 @@
                     <TextBlock
                         Grid.Row="0"
                         Grid.Column="0"
-                        FontSize="15"
+                        FontSize="20"
                         Text="{Binding ActiveFlashcard.Path}" />
                     <TextBlock
                         Grid.Row="0"
                         Grid.Column="1"
                         HorizontalAlignment="Right"
-                        FontSize="12">
+                        FontSize="16">
                         <Run Text="(" /><Run Text="{Binding ActiveFlashcard.ContentLineCount}" />
                         <Run Text="entries)" />
                     </TextBlock>
@@ -117,7 +117,15 @@
                         Grid.Column="0"
                         Grid.ColumnSpan="2"
                         HorizontalAlignment="Left">
-                        <TextBlock Text="{Binding ActiveFlashcard.Content}" />
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock
+                                FontSize="20"
+                                Margin="0, 10"
+                                Text="{Binding ActiveFlashcard.Title}" />
+                            <TextBlock
+                                FontSize="14"
+                                Text="{Binding ActiveFlashcard.Content}" />
+                        </StackPanel>
                     </Viewbox>
                 </Grid>
             </Grid>
